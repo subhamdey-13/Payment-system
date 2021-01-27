@@ -1,0 +1,38 @@
+<section class="p-3">
+  <ngb-accordion [closeOthers]="true" activeIds="1">
+    <ngb-panel id="1">
+      ]<ng-template ngbPanelHeader let-opened="opened">
+        <div class="d-flex align-items-center justify-content-between">
+          <h5 class="m-0">Payment History</h5>
+          <button ngbPanelToggle class="btn btn-link p-0"><i class="fa updown"></i></button>
+        </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="row">
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let payment of payments">
+            <div class="card border-info">
+              <div class="card-body">
+                <h5 class="card-title">{{payment.cardHolder}}</h5>
+                <div class="card-text">
+                  <div class="row">
+                    <div class="col-4"><strong>Card No.</strong></div>
+                    <div class="col-8 text-right">{{payment.creditCardNumber}}</div>
+                    <div class="col-4"><strong>Expiry Date</strong></div>
+                    <div class="col-8 text-right">{{payment.expirationDate}}</div>
+                    <div class="col-4"><strong>CVV</strong></div>
+                    <div class="col-8 text-right" *ngIf="payment.securityCode">{{payment.securityCode}}</div>
+                    <div class="col-8 text-right" *ngIf="!payment.securityCode">Not Available</div>
+                    <div class="col-4"><strong>Amount</strong></div>
+                    <div class="col-8 text-right">{{payment.amount}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+
+
+</section>

@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.cursor {
+    cursor: pointer;
+}
+
+ngb-accordion .card-header .btn-link.collapsed .updown:before {
+    content: '\F077';
+}
+
+ngb-accordion .card-header .btn-link .updown:before {
+    content: '\F078';
+}

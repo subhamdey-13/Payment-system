@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-12">
+    <form id="cardDetailForm" [formGroup]="cardDetailForm">
+      <div class="card">
+        <div class="card-header">Card Details</div>
+        <div class="row card-body">
+          <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+              <label class="mb-0">Card Number <span class="required">*</span></label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="creditCardNumber" formControlName="creditCardNumber"
+                  placeholder="Enter 12 digit Card Number" [(ngModel)]="cardDetails.creditCardNumber" required>
+                <div
+                  *ngIf="cardDetailForm.controls?.creditCardNumber.touched && cardDetailForm.controls.creditCardNumber.status==='INVALID'"
+                  class="form-text text-danger mt-0 col-12">
+                  <small>
+                    Invalid Card Number
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+              <label class="mb-0">Card Holder <span class="required">*</span></label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="cardHolder" formControlName="cardHolder"
+                  placeholder="Card Holder's Name" [(ngModel)]="cardDetails.cardHolder" required>
+                <div
+                  *ngIf="cardDetailForm.controls?.cardHolder.touched && cardDetailForm.controls.cardHolder.status==='INVALID'"
+                  class="form-text text-danger mt-0 col-12">
+                  <small>
+                    Enter Full Name
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+              <label class="mb-0">Expiration Date <span class="required">*</span></label>
+              <div class="input-group">
+                <input class="form-control" name="expirationDate" formControlName="expirationDate" ngbDatepicker
+                  #dtExp="ngbDatepicker" placeholder="Select Date" [(ngModel)]="cardDetails.expirationDate"
+                  container="body" [minDate]="minDate" (ngModelChange)="onChanges()" required>
+                <div class="input-group-append">
+                  <i class="fa fa-calendar input-group-text pt-2" (click)="dtExp.toggle()"></i>
+                </div>
+                <div
+                  *ngIf="cardDetailForm.controls?.expirationDate.touched && cardDetailForm.controls.expirationDate.status==='INVALID'"
+                  class="form-text text-danger mt-0 col-12">
+                  <small>
+                    Please Select Date
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+              <label class="mb-0">Security Code - CVV</label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="securityCode" formControlName="securityCode"
+                  placeholder="Enter CVV(3-digits)" [(ngModel)]="cardDetails.securityCode">
+                <div
+                  *ngIf="cardDetailForm.controls?.securityCode.touched && cardDetailForm.controls.securityCode.status==='INVALID'"
+                  class="form-text text-danger mt-0 col-12">
+                  <small>
+                    Please Enter 3-digits CVV
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+              <label class="mb-0">Amount <span class="required">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend"><i class="fa fa-usd input-group-text pt-2"></i></div>
+                <input type="number" class="form-control" name="amount" min="1" formControlName="amount"
+                  placeholder="Enter Amount" [(ngModel)]="cardDetails.amount" required>
+                <div
+                  *ngIf="cardDetailForm.controls?.amount.touched && cardDetailForm.controls.amount.status==='INVALID'"
+                  class="form-text text-danger mt-0 col-12">
+                  <small>
+                    Please Enter Amount
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12"><span class="required">*</span> - Required Fields </div>
+        </div>
+        <div class="card-footer text-center">
+          <button type="submit" class="btn btn-success"
+            [disabled]="this.cardDetailForm.status==='INVALID'" (click)="addPayment()">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
