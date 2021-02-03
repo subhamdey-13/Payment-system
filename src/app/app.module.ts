@@ -12,7 +12,9 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UtilityServiceService } from './services/utility-service/utility-service.service';
-import { PaymentEffects, paymentInitialState, paymentReducer } from './state/payment-state/payment-effects';
+import { PaymentEffects, paymentInitialState } from './state/payment-state/payment-effects';
+import {  PaymentStore } from './state/payment-state/payment-actions';
+import { ofAction, createReducer } from 'ngrx-actions';
 
 const routes: Routes = [
   {
@@ -31,6 +33,10 @@ const routes: Routes = [
 ];
 
 const EFFECTS = [PaymentEffects];
+const _paymentReducer = createReducer(PaymentStore);
+export function paymentReducer(state, action) {
+  return _paymentReducer(state, action)
+}
 
 @NgModule({
   declarations: [
@@ -41,7 +47,7 @@ const EFFECTS = [PaymentEffects];
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(routes),
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(

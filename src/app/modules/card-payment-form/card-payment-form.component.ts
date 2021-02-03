@@ -70,14 +70,14 @@ export class CardPaymentFormComponent implements OnInit {
       id: null,
       creditCardNumber: this.cardDetails.creditCardNumber,
       cardHolder: this.cardDetails.cardHolder,
-      expirationDate: this.convertDateToyyyymmdd(this.cardDetails.expirationDate),
+      expirationDate: new Date(this.convertDateToyyyymmdd(this.cardDetails.expirationDate)),
       securityCode: this.cardDetails.securityCode,
       amount: Number(this.cardDetails.amount),
     }
 
     this.store.dispatch(new AddCardPayment(params as CardPaymentFormat));
     this.store.select('payments').subscribe(store => {
-      if (store.payment) {
+      if (store.payments) {
         this.router.navigate(['/dashboard']);
       }
     });

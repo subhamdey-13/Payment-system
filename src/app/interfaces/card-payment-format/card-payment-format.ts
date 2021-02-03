@@ -2,7 +2,7 @@ export interface CardPaymentFormat {
     id: number;
     creditCardNumber: string;
     cardHolder: string;
-    expirationDate: string;
+    expirationDate: Date;
     securityCode: string;
     amount: number;
 }

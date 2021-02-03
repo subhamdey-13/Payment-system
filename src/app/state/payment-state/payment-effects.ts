@@ -13,14 +13,14 @@ export class PaymentEffects {
     private action$: Actions,
     private utilityService: UtilityServiceService) {}
 
-// @Effect()
+@Effect()
 addPayment$ = this.action$.pipe(
   ofAction(AddCardPayment),
   switchMap(payment => this.utilityService.addCardPayment(payment.payload)),
   map(response => new AddCardPaymentSuccess(response)));
 
 
-// @Effect()
+@Effect()
 getPayments$ = this.action$.pipe(
   ofAction(GetCardPayments),
   switchMap(payment => this.utilityService.getCardPayments().pipe(
@@ -37,5 +37,4 @@ getPayments$ = this.action$.pipe(
   )));
 }
 
-export const paymentReducer = createReducer(PaymentStore);
 export const paymentInitialState = { payments: []};

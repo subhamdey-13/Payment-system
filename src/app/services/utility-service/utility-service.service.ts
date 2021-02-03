@@ -32,7 +32,7 @@ export class UtilityServiceService {
   }
 
   createNotification(content: string, title, notificationType: string) {
-    let timeout = 3000;
+    let timeout = 13000;
     switch (notificationType) {
       case 'success':
         this.notificationService.success(content, title, {

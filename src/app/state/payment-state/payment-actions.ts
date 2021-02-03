@@ -26,7 +26,7 @@ export class GetCardPaymentsFailure{
 }
 
 @Store({ payments: [] })
-
+@Injectable()
 export class PaymentStore {
       @Action(AddCardPayment)
       addCardPayment(){};
