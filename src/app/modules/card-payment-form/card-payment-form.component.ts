@@ -4,6 +4,8 @@ import { CardPaymentFormat } from '../../interfaces/card-payment-format/card-pay
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { UtilityServiceService } from '../../services/utility-service/utility-service.service';
+import { Store } from '@ngrx/store';
+import { AddCardPayment } from '../../state/payment-state/payment-actions';
 
 @Component({
   selector: 'app-card-payment-form',
@@ -25,7 +27,8 @@ export class CardPaymentFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private dateParser: NgbDateParserFormatter,
-    private utilityService: UtilityServiceService
+    private utilityService: UtilityServiceService,
+    private store: Store<any>
   ) { }
 
   ngOnInit(): void {
@@ -71,12 +74,19 @@ export class CardPaymentFormComponent implements OnInit {
       securityCode: this.cardDetails.securityCode,
       amount: Number(this.cardDetails.amount),
     }
-    this.utilityService.addCardPayment(params as CardPaymentFormat)
-      .subscribe(payment => {
-        if (payment) {
-          this.router.navigate(['/dashboard']);
-        }
-      });
+
+    this.store.dispatch(new AddCardPayment(params as CardPaymentFormat));
+    this.store.select('payments').subscribe(store => {
+      if (store.payment) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
+    // this.utilityService.addCardPayment(params as CardPaymentFormat)
+    //   .subscribe(payment => {
+    //     if (payment) {
+    //       this.router.navigate(['/dashboard']);
+    //     }
+    //   });
   }
 
 }

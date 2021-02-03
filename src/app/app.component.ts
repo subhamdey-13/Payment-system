@@ -17,7 +17,9 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) { }
   ngOnInit() {
     const navUrl = window.location.pathname.split('/')[1];
-    const selectedUrl: any = _.find(this.navList, ['href', navUrl]);
+    const selectedUrl: any = _.find(this.navList, (obj: any, index) => {
+      return obj.href===navUrl;
+    });
     this.redirectToUrl(selectedUrl ? selectedUrl : this.navList[0]);
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
 
   afterNavigation(): any {
     const navUrl = window.location.pathname.split('/')[1];
-    _.forEach(this.navList, (obj: any, index)=>{
+    _.forEach(this.navList, (obj: any, index) => {
       obj.isActive = (obj.href === navUrl) ? true : false;
     });
   }
@@ -38,8 +40,8 @@ export class AppComponent implements OnInit {
     if (!navLink.isActive) {
       this.navList = _.forEach(this.navList, (obj: any, index) => {
         obj.isActive = (obj.href === navLink.href) ? true : false;
-        navLink.isActive = (obj.href === navLink.href) ? true: navLink.isActive;
-    });
+        navLink.isActive = (obj.href === navLink.href) ? true : navLink.isActive;
+      });
 
       this.router.navigate([navLink.href]);
     }

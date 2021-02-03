@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,13 +7,30 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { CardPaymentDataService } from './data/card-payment-data.service';
-import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UtilityServiceService } from './services/utility-service/utility-service.service';
-// import { PaymentEffects, paymentInitialState, paymentReducer } from './state/payment-state/payment-effects';
+import { PaymentEffects, paymentInitialState, paymentReducer } from './state/payment-state/payment-effects';
+
+const routes: Routes = [
+  {
+    path: 'dashboard',
+    loadChildren:'./modules/dashboard/dashboard.module#DashboardModule',
+  },
+  {
+    path: 'payment-form',
+    loadChildren: './modules/card-payment-form/card-payment-form.module#CardPaymentFormModule',
+  },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  }
+];
+
+const EFFECTS = [PaymentEffects];
 
 @NgModule({
   declarations: [
@@ -24,15 +42,14 @@ import { UtilityServiceService } from './services/utility-service/utility-servic
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    RouterModule.forRoot(routes),
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       CardPaymentDataService, { dataEncapsulation: false }
     ),
-    // StoreModule.forRoot({}),
-    // StoreModule.forFeature('payments', paymentReducer, { initialState: paymentInitialState }),
-    // EffectsModule.forRoot([]),
-    // EffectsModule.forFeature([PaymentEffects]),
-    AppRoutingModule,
+    StoreModule.forRoot({paymemt: paymentReducer}),
+    StoreModule.forFeature('payments', paymentReducer, { initialState: paymentInitialState }),
+    EffectsModule.forRoot(EFFECTS),
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',

@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { CardPaymentFormat } from '../interfaces/card-payment-format/card-payment-format';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CardPaymentDataService implements InMemoryDbService {
   createDb() {
     const payments = [

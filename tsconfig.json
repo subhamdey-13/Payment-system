@@ -1,31 +1,14 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "ngrx-actions": [
-        "../node_modules/ngrx-actions/dist"
-      ]
-    }
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false
+      "experimentalDecorators": true,
+      "allowJs": true,
+      "target": "es2015",
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "lib": [
+          "dom",
+          "es5"
+       ]
   }
 }
