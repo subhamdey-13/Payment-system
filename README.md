@@ -1,7 +1,6 @@
 # CardManager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
-Due to issues with `ngrx-actions` and other `@ngrx` libraries, it is recommended to remove the packages from `package.json` before running `npm install`. I have currently commented the code that required these libraries as they caused issues while `ng build`.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version `6.2.5`
 
 ## Development server
 
